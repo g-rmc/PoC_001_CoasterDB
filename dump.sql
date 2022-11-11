@@ -26,7 +26,7 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public.coasters (
     id integer NOT NULL,
-    "rcdbLink" text,
+    "rcdbLink" text NOT NULL,
     "coasterName" character varying(255) NOT NULL,
     "parkName" character varying(255),
     length integer,
