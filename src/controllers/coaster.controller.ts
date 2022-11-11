@@ -1,8 +1,14 @@
 import { Request, Response } from 'express';
 
-async function getCoasters(req: Request, res: Response){
-    console.log('getCoasters');
-    res.sendStatus(200);
+import { coasterRepository } from '../repositories/coaster.repositories.js';
+
+async function getCoasters(_req: Request, res: Response){
+    try {
+        const coasters = await coasterRepository.listAllCoasters();
+        res.send(coasters.rows);
+    } catch (error) {
+        res.sendStatus(500);
+    }
 }
 
 async function createCoaster(req: Request, res: Response){
