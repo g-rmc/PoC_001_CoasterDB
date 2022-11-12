@@ -11,7 +11,15 @@ async function findCoasterByRcdbLink(rcdbLink: string): Promise <QueryResult<Coa
         `SELECT * FROM coasters
         WHERE "rcdbLink" = $1;`,
         [rcdbLink]
-    )
+    );
+}
+
+async function findCoasterById(id: number): Promise <QueryResult<CoasterEntity>>{
+    return connection.query(
+        `SELECT * FROM coasters
+        WHERE id = $1;`,
+        [id]
+    );
 }
 
 async function insertNewCoaster(newCoaster: Coaster) {
@@ -36,8 +44,35 @@ async function insertNewCoaster(newCoaster: Coaster) {
     return id;
 }
 
+async function updateCoasterById(id: number, updatedCoaster: Coaster) {
+    return connection.query(
+        `UPDATE coasters
+        SET
+            "rcdbLink" = $2,
+            "coasterName" = $3,
+            "parkName" = $4,
+            "length" = $5,
+            "drop" = $6,
+            "speed" = $7,
+            "openingYear" = $8
+        WHERE
+            id = $1;`,
+        [
+            id,
+            updatedCoaster.rcdbLink,
+            updatedCoaster.coasterName,
+            updatedCoaster.parkName,
+            updatedCoaster.length,
+            updatedCoaster.drop,
+            updatedCoaster.speed,
+            updatedCoaster.openingYear
+        ]);
+}
+
 export const coasterRepository = {
     listAllCoasters,
     findCoasterByRcdbLink,
-    insertNewCoaster
+    findCoasterById,
+    insertNewCoaster,
+    updateCoasterById
 }

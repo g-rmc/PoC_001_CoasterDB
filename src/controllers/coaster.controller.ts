@@ -23,8 +23,14 @@ async function createCoaster(req: Request, res: Response){
 }
 
 async function updateCoaster(req: Request, res: Response){
-    console.log('updateCoaster | id: ',req.params.id);
-    res.sendStatus(200);
+    const updatedCoaster: Coaster = req.body;
+    const id: number = Number(res.locals.id);
+    try {
+        await coasterRepository.updateCoasterById(id, updatedCoaster);
+        res.status(200).send(`Updated coaster with id: ${id}`);
+    } catch (error) {
+        res.sendStatus(500);
+    }
 }
 
 async function deleteCoaster(req: Request, res: Response){
