@@ -44,8 +44,12 @@ async function deleteCoaster(_req: Request, res: Response){
 }
 
 async function countCoasters(_req: Request, res: Response){
-    console.log('countCoasters');
-    res.sendStatus(200);
+    try {
+        const result = await coasterRepository.countEveryCoaster();
+        res.send(result.rows[0].coastersRegistered);
+    } catch (error) {
+        res.sendStatus(500);
+    }
 }
 
 async function getOneCoaster(_req: Request, res: Response) {

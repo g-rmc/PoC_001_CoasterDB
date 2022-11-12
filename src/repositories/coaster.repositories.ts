@@ -79,8 +79,10 @@ async function deleteCoasterById(id: number) {
     return
 }
 
-function countEveryCoaster() {
-
+function countEveryCoaster(): Promise <QueryResult<{coastersRegistered: number}>> {
+    return connection.query(
+        `SELECT COUNT(id) as "coastersRegistered" FROM coasters;`
+    )
 }
 
 export const coasterRepository = {
@@ -89,5 +91,6 @@ export const coasterRepository = {
     findCoasterById,
     insertNewCoaster,
     updateCoasterById,
-    deleteCoasterById
+    deleteCoasterById,
+    countEveryCoaster
 }
