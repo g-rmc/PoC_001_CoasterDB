@@ -1,7 +1,8 @@
 import joi from 'joi';
 import { regexPatterns } from '../constants/regexPatterns.js';
+import { Coaster } from '../protocols/Coaster.js';
 
-export const coasterSchema = joi.object({
+export const coasterSchema = joi.object<Coaster>({
     rcdbLink: joi.string().pattern(regexPatterns.rcdbLink, 'rcdb link').required(),
     coasterName: joi.string().required(),
     parkName: joi.string(),

@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { Coaster } from '../protocols/Coaster.js';
 
 import { coasterRepository } from '../repositories/coaster.repositories.js';
 
@@ -12,8 +13,13 @@ async function getCoasters(_req: Request, res: Response){
 }
 
 async function createCoaster(req: Request, res: Response){
-    console.log('createCoaster');
-    res.sendStatus(200);
+    const newCoaster: Coaster = req.body;
+    try {
+        const id = await coasterRepository.insertNewCoaster(newCoaster);
+        res.status(201).send(`Coaster created with id: ${id}`);
+    } catch (error) {
+        res.sendStatus(500);
+    }
 }
 
 async function updateCoaster(req: Request, res: Response){
