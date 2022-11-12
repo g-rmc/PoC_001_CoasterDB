@@ -2,11 +2,11 @@ import { QueryResult } from 'pg';
 import { Coaster, CoasterEntity } from '../protocols/Coaster.js';
 import { connection } from '../database/database.js';
 
-async function listAllCoasters(): Promise <QueryResult<CoasterEntity>> {
+function listAllCoasters(): Promise <QueryResult<CoasterEntity>> {
     return connection.query("SELECT * FROM coasters;")
 }
 
-async function findCoasterByRcdbLink(rcdbLink: string): Promise <QueryResult<CoasterEntity>>{
+function findCoasterByRcdbLink(rcdbLink: string): Promise <QueryResult<CoasterEntity>>{
     return connection.query(
         `SELECT * FROM coasters
         WHERE "rcdbLink" = $1;`,
@@ -14,7 +14,7 @@ async function findCoasterByRcdbLink(rcdbLink: string): Promise <QueryResult<Coa
     );
 }
 
-async function findCoasterById(id: number): Promise <QueryResult<CoasterEntity>>{
+function findCoasterById(id: number): Promise <QueryResult<CoasterEntity>>{
     return connection.query(
         `SELECT * FROM coasters
         WHERE id = $1;`,
@@ -44,7 +44,7 @@ async function insertNewCoaster(newCoaster: Coaster) {
     return id;
 }
 
-async function updateCoasterById(id: number, updatedCoaster: Coaster) {
+function updateCoasterById(id: number, updatedCoaster: Coaster) {
     return connection.query(
         `UPDATE coasters
         SET
@@ -69,10 +69,19 @@ async function updateCoasterById(id: number, updatedCoaster: Coaster) {
         ]);
 }
 
+function deleteCoasterById(id: number) {
+    return connection.query(
+        `DELETE FROM coasters
+        WHERE id = $1;`,
+        [id]
+    );
+}
+
 export const coasterRepository = {
     listAllCoasters,
     findCoasterByRcdbLink,
     findCoasterById,
     insertNewCoaster,
-    updateCoasterById
+    updateCoasterById,
+    deleteCoasterById
 }

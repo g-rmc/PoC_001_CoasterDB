@@ -33,9 +33,14 @@ async function updateCoaster(req: Request, res: Response){
     }
 }
 
-async function deleteCoaster(req: Request, res: Response){
-    console.log('deleteCoaster | id: ', req.params.id);
-    res.sendStatus(200);
+async function deleteCoaster(_req: Request, res: Response){
+    const id: number = Number(res.locals.id);
+    try {
+        await coasterRepository.deleteCoasterById(id);
+        res.status(202).send(`Deleted coaster with id: ${id}`);
+    } catch (error) {
+        res.sendStatus(500);
+    }
 }
 
 async function countCoasters(req: Request, res: Response){

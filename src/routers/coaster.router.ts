@@ -20,6 +20,7 @@ router
         validateUniqueRcdbLink,
         coaster.updateCoaster)
     .delete('/coasters/:id',
+        validateExistingId,
         coaster.deleteCoaster)
     .get('/coasters/count',
         coaster.countCoasters);
