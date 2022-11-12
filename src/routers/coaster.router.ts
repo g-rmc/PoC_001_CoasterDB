@@ -23,6 +23,9 @@ router
         validateExistingId,
         coaster.deleteCoaster)
     .get('/coasters/count',
-        coaster.countCoasters);
+        coaster.countCoasters)
+    .get('/coasters/:id',
+        validateExistingId,
+        coaster.getOneCoaster);
 
 export default router;

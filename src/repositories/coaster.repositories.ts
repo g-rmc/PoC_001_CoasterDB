@@ -44,8 +44,8 @@ async function insertNewCoaster(newCoaster: Coaster) {
     return id;
 }
 
-function updateCoasterById(id: number, updatedCoaster: Coaster) {
-    return connection.query(
+async function updateCoasterById(id: number, updatedCoaster: Coaster) {
+    await connection.query(
         `UPDATE coasters
         SET
             "rcdbLink" = $2,
@@ -67,14 +67,20 @@ function updateCoasterById(id: number, updatedCoaster: Coaster) {
             updatedCoaster.speed,
             updatedCoaster.openingYear
         ]);
+    return;
 }
 
-function deleteCoasterById(id: number) {
-    return connection.query(
+async function deleteCoasterById(id: number) {
+    await connection.query(
         `DELETE FROM coasters
         WHERE id = $1;`,
         [id]
     );
+    return
+}
+
+function countEveryCoaster() {
+
 }
 
 export const coasterRepository = {

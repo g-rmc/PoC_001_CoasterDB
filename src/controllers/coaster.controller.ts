@@ -43,9 +43,19 @@ async function deleteCoaster(_req: Request, res: Response){
     }
 }
 
-async function countCoasters(req: Request, res: Response){
+async function countCoasters(_req: Request, res: Response){
     console.log('countCoasters');
     res.sendStatus(200);
+}
+
+async function getOneCoaster(_req: Request, res: Response) {
+    const id: number = Number(res.locals.id);
+    try {
+        const result = await coasterRepository.findCoasterById(id);
+        res.send(result.rows[0]);
+    } catch (error) {
+        res.sendStatus(500);
+    }
 }
 
 export {
@@ -53,5 +63,6 @@ export {
     createCoaster,
     updateCoaster,
     deleteCoaster,
-    countCoasters
+    countCoasters,
+    getOneCoaster
 }
