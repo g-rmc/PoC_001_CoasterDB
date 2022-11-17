@@ -9,4 +9,14 @@ export type CoasterEntity = {
     openingYear: string
 }
 
+export type NewCoaster = {
+    rcdbLink: string,
+    coasterName: string,
+    parkName?: string,
+    length?: number,
+    drop?: number,
+    speed?: number,
+    openingYear?: string
+}
+
 export type Coaster = Partial<CoasterEntity>
