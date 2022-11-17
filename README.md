@@ -76,7 +76,11 @@ Delete roller coaster by its id
 
 - **GET** /coasters/count
 
-Return the number of roller coasters registered in the database
+Return a object with the number of roller coasters registered in the database
+
+```js
+{ total: 00 }
+```
 
 - **GET** /coasters/:id
 
