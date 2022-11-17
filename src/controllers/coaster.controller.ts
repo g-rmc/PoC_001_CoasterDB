@@ -1,23 +1,24 @@
 import { Request, Response } from 'express';
-import { Coaster } from '../protocols/Coaster.js';
+import { Coaster, NewCoaster } from '../protocols/Coaster.js';
 
 import { coasterRepository } from '../repositories/coaster.repositories.js';
 
 async function getCoasters(_req: Request, res: Response){
     try {
         const coasters = await coasterRepository.listAllCoasters();
-        res.send(coasters.rows);
+        res.send(coasters);
     } catch (error) {
         res.sendStatus(500);
     }
 }
 
 async function createCoaster(req: Request, res: Response){
-    const newCoaster: Coaster = req.body;
+    const newCoaster: NewCoaster = req.body;
     try {
-        const id = await coasterRepository.insertNewCoaster(newCoaster);
-        res.status(201).send(`Coaster created with id: ${id}`);
+        const result = await coasterRepository.insertNewCoaster(newCoaster);
+        res.status(201).send(`Coaster created with id: ${result.id}`);
     } catch (error) {
+        console.log(error)
         res.sendStatus(500);
     }
 }
@@ -46,7 +47,7 @@ async function deleteCoaster(_req: Request, res: Response){
 async function countCoasters(_req: Request, res: Response){
     try {
         const result = await coasterRepository.countEveryCoaster();
-        res.send(result.rows[0].coastersRegistered);
+        res.send({total: result});
     } catch (error) {
         res.sendStatus(500);
     }
@@ -56,7 +57,7 @@ async function getOneCoaster(_req: Request, res: Response) {
     const id: number = Number(res.locals.id);
     try {
         const result = await coasterRepository.findCoasterById(id);
-        res.send(result.rows[0]);
+        res.send(result);
     } catch (error) {
         res.sendStatus(500);
     }
