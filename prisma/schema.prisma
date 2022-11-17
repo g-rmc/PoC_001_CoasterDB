@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model coasters {
+  id          Int     @id(map: "coasters_pk") @default(autoincrement())
+  rcdbLink    String  @unique(map: "public.coasters_rcdbLink_key")
+  coasterName String  @db.VarChar(255)
+  parkName    String? @db.VarChar(255)
+  length      Int?
+  drop        Int?
+  speed       Int?
+  openingYear String? @db.VarChar(4)
+}
