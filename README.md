@@ -1,6 +1,6 @@
 # CoasterDB
 
-A API created to work with a database of Roller Coasters inspired in [rcdb](https://rcdb.com/). This API is based in NodeJS with Typescript and the database is built with PostgreSQL.
+A API created to work with a database of Roller Coasters inspired in [rcdb](https://rcdb.com/). This API is based in NodeJS with Typescript, Prisma and the database is built with PostgreSQL.
 
 ## About this project
 
