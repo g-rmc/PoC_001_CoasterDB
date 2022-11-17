@@ -18,7 +18,6 @@ async function createCoaster(req: Request, res: Response){
         const result = await coasterRepository.insertNewCoaster(newCoaster);
         res.status(201).send(`Coaster created with id: ${result.id}`);
     } catch (error) {
-        console.log(error)
         res.sendStatus(500);
     }
 }
