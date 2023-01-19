@@ -1,19 +1,19 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from 'express';
 
 import { coasterRepository } from '../repositories/coaster.repositories.js';
-import { Coaster } from "../protocols/Coaster.js";
+import { Coaster } from '../protocols/Coaster.js';
 
 async function validateExistingId(req: Request, res: Response, next: NextFunction) {
-    const id: number = Number(req.params.id);
+    const id = Number(req.params.id);
 
-    if(isNaN(id)){
+    if(isNaN(id)) {
         res.status(400).send('invalid id');
         return;
-    };
+    }
 
     try {
         const result = await coasterRepository.findCoasterById(id);
-        if(!result){
+        if(!result) {
             res.status(404).send('id not found');
             return;
         }
@@ -33,8 +33,8 @@ async function validateUniqueRcdbLink(req: Request, res: Response, next: NextFun
 
     try {
         const result = await coasterRepository.findCoasterByRcdbLink(rcdbLink);
-        if(result){
-            if(id === undefined || Number(result.id) !== Number(id)){
+        if(result) {
+            if(id === undefined || Number(result.id) !== Number(id)) {
                 res.status(409).send('rcdbLink already in use');
                 return;
             }
@@ -50,4 +50,4 @@ async function validateUniqueRcdbLink(req: Request, res: Response, next: NextFun
 export { 
     validateExistingId,
     validateUniqueRcdbLink
-}
+};
