@@ -69,4 +69,4 @@ export {
     deleteCoaster,
     countCoasters,
     getOneCoaster
-}
+};
