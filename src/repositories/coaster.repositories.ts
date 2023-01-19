@@ -1,4 +1,3 @@
-import { QueryResult } from 'pg';
 import { Coaster, NewCoaster } from '../protocols/Coaster.js';
 import prisma from '../database/database.js';
 
@@ -6,7 +5,7 @@ function listAllCoasters() {
     return prisma.coasters.findMany();
 }
 
-function findCoasterByRcdbLink(rcdbLink: string){
+function findCoasterByRcdbLink(rcdbLink: string) {
     return prisma.coasters.findUnique({
         where: {
             rcdbLink
@@ -14,7 +13,7 @@ function findCoasterByRcdbLink(rcdbLink: string){
     });
 }
 
-function findCoasterById(id: number){
+function findCoasterById(id: number) {
     return prisma.coasters.findUnique({
         where: {
             id
@@ -57,4 +56,4 @@ export const coasterRepository = {
     updateCoasterById,
     deleteCoasterById,
     countEveryCoaster
-}
+};
