@@ -11,4 +11,3 @@ jobs:
         run: npm i && npm run build
       - name: Run eslint
         run: npm run lint
-
