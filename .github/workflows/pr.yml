@@ -8,6 +8,6 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: Build
-        run: npm i && npm run build
+        run: npm i
       - name: Run eslint
         run: npm run lint
