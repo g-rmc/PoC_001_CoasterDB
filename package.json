@@ -6,6 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node ./dist/server.js",
+    "build": "ttsc -p tsconfig.build.json",
+    "lint": "eslint .",
     "dev": "nodemon ./src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
