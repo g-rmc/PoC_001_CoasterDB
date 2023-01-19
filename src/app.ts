@@ -11,4 +11,4 @@ app
     .get('/hello', (_req, res) => res.send('Hello!'))
     .use(coasterRouter);
 
-export default app
+export default app;
